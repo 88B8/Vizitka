@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Vizitka</string>
+    <string name="phone_string">+00 (00) 000 000</string>
+    <string name="username_string">\@socialmediahandle</string>
+    <string name="email_string">email@domain.com</string>
+    <string name="name_string">Петров И.И.</string>
+    <string name="title_string">Пятерочка</string>
+</resources>
