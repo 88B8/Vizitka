@@ -117,46 +117,29 @@ fun BottomInfo(
     Column(
         modifier = modifier
     ) {
-        Row(
-            modifier = modifier
-        ) {
-            IconImage(
-                R.drawable.phone_icon,
-            )
-            Text(
-                text = phoneNumber,
-                color = Color(0xFF3ddc84),
-                modifier = modifier
-                    .padding(start = 10.dp)
-            )
-        }
+        BottomInfoRow(phoneNumber, R.drawable.phone_icon, 0xFF3dda00, modifier)
+        BottomInfoRow(username, R.drawable.username_icon, 0xFF3dda11, modifier)
+        BottomInfoRow(email, R.drawable.email_icon, 0xFF3dda99, modifier)
+    }
+}
 
-        Row(
+@Composable
+fun BottomInfoRow(
+    text: String,
+    @DrawableRes id : Int,
+    color : Long,
+    modifier : Modifier = Modifier)
+{
+    Row(
+        modifier = modifier
+    ) {
+        IconImage(id)
+        Text(
+            text = text,
+            color = Color(color),
             modifier = modifier
-        ) {
-            IconImage(
-                R.drawable.username_icon,
-            )
-            Text(
-                text = username,
-                color = Color(0xFF3ddc11),
-                modifier = modifier
-                    .padding(start = 10.dp)
-            )
-        }
-
-        Row(
-            modifier = modifier
-        ) {
-            IconImage(
-                R.drawable.email_icon,
-            )
-            Text(
-                text = email,
-                modifier = modifier
-                    .padding(start = 10.dp)
-            )
-        }
+                .padding(start = 10.dp)
+        )
     }
 }
 
