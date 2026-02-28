@@ -4,8 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -17,12 +17,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.BlendMode.Companion.Color
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -38,7 +36,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background,
                 ) {
-                    VizitkaText(
+                    VizitkaCard(
                         phoneNumber = stringResource(R.string.phone_string),
                         username = stringResource(R.string.username_string),
                         email = stringResource(R.string.email_string),
@@ -52,7 +50,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun VizitkaText(
+fun VizitkaCard(
     phoneNumber: String,
     username: String,
     email: String,
@@ -61,8 +59,6 @@ fun VizitkaText(
     modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Spacer(modifier.weight(1f))
@@ -74,11 +70,12 @@ fun VizitkaText(
         )
 
         Spacer(modifier.weight(1f))
-        BottomText(
+        BottomInfo(
             phoneNumber = phoneNumber,
             username = username,
             email = email,
             modifier = Modifier
+                .padding(bottom = 10.dp)
         )
     }
 }
@@ -93,109 +90,84 @@ fun CenterText(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
     ) {
-        PersonImage()
+        IconImage(
+            R.drawable.person_icon,
+        )
         Text(
             text = fullName,
-            fontWeight = FontWeight.Bold,
+            fontWeight = FontWeight.Thin,
             fontSize = 44.sp,
             lineHeight = 40.sp,
-            textAlign = TextAlign.Center,
         )
         Text(
             text = title,
             fontWeight = FontWeight.Bold,
             fontSize = 22.sp,
-            textAlign = TextAlign.Center,
         )
     }
 }
 
 @Composable
-fun BottomText(
+fun BottomInfo(
     phoneNumber: String,
     username: String,
     email: String,
     modifier: Modifier = Modifier
 ) {
     Column(
-        horizontalAlignment = Alignment.Start,
         modifier = modifier
-            .padding(bottom = 30.dp)
     ) {
         Row(
-            verticalAlignment = Alignment.CenterVertically,
             modifier = modifier
-                .padding(bottom = 10.dp)
         ) {
-            PhoneImage()
+            IconImage(
+                R.drawable.phone_icon,
+            )
             Text(
                 text = phoneNumber,
                 color = Color(0xFF3ddc84),
+                modifier = modifier
+                    .padding(start = 10.dp)
             )
         }
 
         Row(
-            verticalAlignment = Alignment.CenterVertically,
             modifier = modifier
-                .padding(bottom = 10.dp)
         ) {
-            UsernameImage()
+            IconImage(
+                R.drawable.username_icon,
+            )
             Text(
                 text = username,
-                color = Color(0xFF3ddc11)
+                color = Color(0xFF3ddc11),
+                modifier = modifier
+                    .padding(start = 10.dp)
             )
         }
 
         Row(
-            verticalAlignment = Alignment.CenterVertically,
             modifier = modifier
-                .padding(bottom = 10.dp)
         ) {
-            EmailImage()
+            IconImage(
+                R.drawable.email_icon,
+            )
             Text(
                 text = email,
+                modifier = modifier
+                    .padding(start = 10.dp)
             )
         }
     }
 }
 
 @Composable
-fun PhoneImage(modifier : Modifier = Modifier) {
-    val phoneImage = painterResource(R.drawable.phone_icon)
+fun IconImage(@DrawableRes id: Int, modifier : Modifier = Modifier) {
+    val image = painterResource(id)
 
     Image(
-        painter = phoneImage,
+        painter = image,
         contentDescription = null,
-    )
-}
-
-@Composable
-fun UsernameImage(modifier : Modifier = Modifier) {
-    val usernameImage = painterResource(R.drawable.username_icon)
-
-    Image(
-        painter = usernameImage,
-        contentDescription = null,
-    )
-}
-
-@Composable
-fun EmailImage(modifier : Modifier = Modifier) {
-    val emailImage = painterResource(R.drawable.email_icon)
-
-    Image(
-        painter = emailImage,
-        contentDescription = null,
-    )
-}
-
-@Composable
-fun PersonImage(modifier: Modifier = Modifier) {
-    val personImage = painterResource(R.drawable.person_icon)
-
-    Image(
-        painter = personImage,
-        contentDescription = null,
+        modifier = modifier,
     )
 }
 
@@ -203,7 +175,7 @@ fun PersonImage(modifier: Modifier = Modifier) {
 @Composable
 fun GreetingPreview() {
     VizitkaTheme {
-        VizitkaText(
+        VizitkaCard(
             phoneNumber = stringResource(R.string.phone_string),
             username = stringResource(R.string.username_string),
             email = stringResource(R.string.email_string),
